@@ -8,8 +8,7 @@ public class CsvReader {
     public static List<String> readCsv() {
         try {
             URL csvUrl = CsvReader.class.getClassLoader().getResource("edges.csv");
-            List<String> lines = Files.readAllLines(Path.of(csvUrl.toURI()));
-            return lines;
+            return Files.readAllLines(Path.of(csvUrl.toURI()));
         } catch (Exception e) {
             throw new RuntimeException(e);
         }

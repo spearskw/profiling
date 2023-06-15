@@ -1,6 +1,6 @@
 fun main() {
-    val lines = CsvReader.readCsv()
-    computeStuff(lines)
+    writeCsv(1000)
+    computeStuff(CsvReader.readCsv())
 }
 
 fun computeStuff(lines: List<String>) {
