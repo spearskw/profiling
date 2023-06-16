@@ -2,7 +2,14 @@ import kotlin.io.path.toPath
 import kotlin.random.Random
 import kotlin.random.nextInt
 
-fun writeCsv(numNodes: Int) {
+fun createRandomProblem(numNodes: Int): TspProblem {
+    saveRandomProblem(numNodes)
+    val costMatrix = CostMatrix()
+    val nodes = (0 until numNodes).map { Node(it) }
+    return TspProblem(costMatrix, nodes)
+}
+
+private fun saveRandomProblem(numNodes: Int) {
     val file = {}.javaClass.classLoader
         .getResource("edges.csv")
         .toURI().toPath().toFile()
@@ -11,9 +18,9 @@ fun writeCsv(numNodes: Int) {
     writer.write("origin, destination, cost")
     writer.newLine()
 
-    val range = (0 until numNodes)
-    range.forEach { origin ->
-        range.forEach { destination ->
+    val nodeIds = (0 until numNodes)
+    nodeIds.forEach { origin ->
+        nodeIds.forEach { destination ->
             if (origin == destination) {
                 writer.write("${origin}, ${destination}, 0")
             } else {
