@@ -1,6 +1,6 @@
 fun main() {
     val problem = createRandomProblem(100)
-    val bestTour = findBestTour(problem, 100)
+    val bestTour = findBestTour(problem, 1000)
     val bestTourCost = calcCost(problem.costMatrix, bestTour)
     println("Cost of the best tour is ${bestTourCost}")
 }
