@@ -1,20 +1,22 @@
 class CostMatrix {
 
-    private val costMap: Map<Pair<Int, Int>, Int>
+    private val costArray: MutableList<MutableList<Int>> = mutableListOf()
     init {
         val lines = {}.javaClass.classLoader
-            .getResourceAsStream("edges.csv")
+            .getResourceAsStream("edges.csv")!!
             .bufferedReader().readLines()
 
-        costMap = lines
-            .drop(1)
-            .map { parseLine(it) }
-            .associate { Pair(it[0], it[1]) to it[2] }
+        lines.drop(1).forEach {
+            val (rowIndex, colIndex, cost) = parseLine(it)
+            if (rowIndex >= costArray.size) {
+                costArray.add(rowIndex, mutableListOf())
+            }
+            costArray[rowIndex].add(colIndex, cost)
+        }
     }
 
     fun findCost(origin: Node, destination: Node): Int {
-        val pair = Pair(origin.id, destination.id)
-        return costMap[pair]!!
+        return costArray[origin.id][destination.id]
     }
 
     private fun parseLine(line: String): List<Int> {
