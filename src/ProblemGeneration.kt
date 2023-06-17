@@ -11,23 +11,21 @@ fun createRandomProblem(numNodes: Int): TspProblem {
 
 private fun saveRandomProblem(numNodes: Int) {
     val file = {}.javaClass.classLoader
-        .getResource("edges.csv")
+        .getResource("edges.txt")
         .toURI().toPath().toFile()
 
     val writer = file.bufferedWriter()
-    writer.write("origin, destination, cost")
-    writer.newLine()
 
     val nodeIds = (0 until numNodes)
     nodeIds.forEach { origin ->
         nodeIds.forEach { destination ->
             if (origin == destination) {
-                writer.write("${origin}, ${destination}, 0")
+                writer.write("00")
             } else {
-                writer.write("${origin}, ${destination}, ${Random.nextInt((10..100))}")
+                writer.write("${Random.nextInt((10 until 100))}")
             }
-            writer.newLine()
         }
+        writer.newLine()
     }
 
     writer.close()
