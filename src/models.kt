@@ -6,3 +6,11 @@ data class TspProblem(
 data class Node(
     val id: Int
 )
+
+data class TourChange(
+    val indexSwaps: List<Pair<Int, Int>>
+) {
+    fun reversed(): TourChange {
+        return TourChange(this.indexSwaps.map { Pair(it.second, it.first) })
+    }
+}
